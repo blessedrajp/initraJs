@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "target": "ES2021",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "lib": ["ES2021"],
+    "outDir": "./dist",  // Changed to root-level dist
+    "rootDir": "./",     // Changed to project root
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*", "bin/**/*"],  // Updated include pattern
+  "exclude": ["node_modules", "dist", "src/templates"]
+}
