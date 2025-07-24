@@ -5,14 +5,14 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "lib": ["ES2021"],
-    "outDir": "./dist",  // Changed to root-level dist
-    "rootDir": "./",     // Changed to project root
+    "outDir": "./dist",
+    "rootDir": "./",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
   },
-  "include": ["src/**/*", "bin/**/*"],  // Updated include pattern
+  "include": ["src/**/*", "bin/**/*"],
   "exclude": ["node_modules", "dist", "src/templates"]
 }

@@ -1,13 +1,17 @@
 {
   "name": "initrajs",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "main": "index.js",
   "bin": {
-    "blazeup": "dist/bin/initra.js"
+    "initrajs": "dist/src/bin/initra.js"
   },
+  "files": [
+    "dist/",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
-    "postbuild": "cpy \"src/templates/**/*\" dist/templates/ --parents",
     "start": "ts-node src/bin/initra.ts"
   },
   "description": "⚡ Blazeup - Scaffold fullstack apps with React, Next.js, and Node.js templates.",
@@ -30,21 +34,19 @@
     "typescript"
   ],
   "devDependencies": {
+    "@types/degit": "^2.8.6",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^24.0.15",
-    "cpy": "^11.1.0",
-    "cpy-cli": "^5.0.0",
+    "@types/node": "^20.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.4.5"
   },
   "dependencies": {
     "chalk": "^5.4.1",
     "commander": "^14.0.0",
-    "download-git-repo": "^3.0.2",
+    "degit": "^2.8.4",
     "execa": "^9.6.0",
     "fs-extra": "^11.3.0",
-    "inquirer": "^12.8.2",
-    "react": "^19.1.0"
+    "inquirer": "^9.1.5"
   },
   "type": "module"
 }
