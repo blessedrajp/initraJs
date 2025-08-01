@@ -1,6 +1,6 @@
 {
   "name": "initrajs",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "main": "index.js",
   "bin": {
     "initrajs": "dist/src/bin/initra.js"

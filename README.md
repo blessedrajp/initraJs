@@ -3,6 +3,7 @@
 > Scaffold fullstack apps with zero config. Built for speed, scalability, and modern dev workflows.
 
 [![NPM Version](https://img.shields.io/npm/v/initrajs?color=blue)](https://www.npmjs.com/package/initrajs)
+[![Downloads](https://img.shields.io/npm/dw/initrajs.svg)](https://www.npmjs.com/package/initrajs)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Made by Blessed Raj P](https://img.shields.io/badge/made%20by-blessedrajp-blueviolet)](https://github.com/blessedrajp)
 
@@ -75,22 +76,23 @@ initrajs init
 | Next.js  | App Router + MUI | ✅          | AuthGuard, Layouts, Sessions |
 | Node.js  | Express (MVC)    | ✅          | DTOs, Middleware, Services   |
 
-### 📁 Next.js App Structure
+<!-- ### 📁 Next.js App Structure
 
 Powered by the App Router (/app), the project uses layered layouts, contexts, and guards for scalable, secure architecture.
 
 app/
-├── layout.tsx            # Root layout (Redux, Theme, Providers)
+├── layout.tsx              # Root layout (Redux, Theme, Providers)
 ├── auth/
-│   ├── layout.tsx        # Layout for all /auth/* pages (e.g. login/register)
+│   ├── layout.tsx          # Layout for all /auth/* pages (e.g. login/register)
 │   └── login/page.tsx
 ├── pages/
-│   ├── layout.tsx        # Protected layout for authenticated routes
+│   ├── layout.tsx          # Protected layout for authenticated routes
 │   ├── dashboard/
 │   │   └── page.tsx
-│   └── settings/
-│       └── page.tsx
-├── AuthGuard.tsx         # Protects /pages routes, checks token in session
+│   ├── settings/
+│   │   └── page.tsx
+│   └── AuthGuard.tsx       # Protects /pages routes, checks token in session
+      # Protects /pages routes, checks token in session -->
 
 
 #### 🧰 Auth Flow
