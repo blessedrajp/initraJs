@@ -1,145 +1,114 @@
-import fs from 'fs-extra';
+// src/commands/generate-component.ts
+import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
 import { 
-  validateName, 
-  detectFramework, 
-  kebabToPascal, 
-  parseProps,
-  generatePropsInterface,
-  generatePropsUsage
-} from '../utils/component-utils.js';
-import { 
-  getBasicComponentTemplate, 
-  getLayoutComponentTemplate 
+  tsxComponentTemplate, 
+  jsxComponentTemplate, 
+  cssTemplate, 
+  scssTemplate, 
+  testTemplate, 
+  storyTemplate,
+  ComponentTemplateOptions 
 } from '../templates/component-templates.js';
-import { 
-  getBasicComponentCSS, 
-  getLayoutComponentCSS 
-} from '../templates/css-templates.js';
+import { ensureDirectoryExists, toPascalCase } from '../utils/client-utils.js';
 
-interface ComponentOptions {
+export interface GenerateComponentOptions {
   server?: boolean;
   client?: boolean;
   layout?: boolean;
   props?: string;
   path?: string;
+  ts?: boolean;
+  js?: boolean;
+  css?: boolean;
+  test?: boolean;
+  story?: boolean;
 }
 
-export const generateComponent = async (
-  name: string,
-  options: ComponentOptions
-): Promise<void> => {
+export function generateComponent(name: string, options: GenerateComponentOptions) {
   try {
-    // Validate component name
-    if (!validateName(name)) {
-      console.error(chalk.red('❌ Invalid component name. Use only letters, numbers, hyphens and underscores. Must start with a letter.'));
-      return;
-    }
-
-    // Detect framework
-    const framework = detectFramework();
-    
-    // Process component name
-    const componentName = kebabToPascal(name);
+    // Determine file type (default to tsx if neither ts nor js is specified)
+    const isTypeScript = options.js ? false : true; // Default to TypeScript
+    const fileExtension = isTypeScript ? 'tsx' : 'jsx';
     
     // Parse props
-    const props = parseProps(options.props);
+    const props = options.props ? options.props.split(',').map(p => p.trim()) : [];
     
-    // Determine component type
-    const isLayout = options.layout || false;
-    const isServer = options.server || false;
-    const isClient = options.client || false;
+    // Convert name to PascalCase
+    const componentName = toPascalCase(name);
     
-    // Generate interfaces and props usage
-    const propsInterface = generatePropsInterface(props, componentName, isLayout);
-    const propsUsage = generatePropsUsage(props, isLayout);
+    // Determine the output directory
+    const baseDir = options.path || 'src/components';
+    const componentDir = path.join(process.cwd(), baseDir, componentName);
     
-    // Determine component directory
-    const basePath = options.path || 'components';
-    const componentDir = path.join(
-      process.cwd(),
-      'src',
-      basePath,
-      componentName
-    );
-
-    // Create directory
-    await fs.ensureDir(componentDir);
+    // Ensure directory exists
+    ensureDirectoryExists(componentDir);
     
-    // Generate component content based on type
-    let componentContent: string;
-    let cssContent: string;
+    // Template options
+    const templateOptions: ComponentTemplateOptions = {
+      name: componentName,
+      props,
+      isLayout: options.layout,
+      isServer: options.server,
+      isClient: options.client,
+      typescript: isTypeScript,
+      includeCSS: !!options.css
+    };
     
-    if (isLayout) {
-      componentContent = getLayoutComponentTemplate(
-        componentName,
-        props,
-        propsInterface,
-        propsUsage,
-        isServer,
-        framework
-      );
-      cssContent = getLayoutComponentCSS(componentName);
-    } else {
-      componentContent = getBasicComponentTemplate(
-        componentName,
-        props,
-        propsInterface,
-        propsUsage,
-        isServer,
-        framework
-      );
-      cssContent = getBasicComponentCSS(componentName);
+    // Generate component file
+    const componentContent = isTypeScript 
+      ? tsxComponentTemplate(templateOptions)
+      : jsxComponentTemplate(templateOptions);
+    
+    const componentFilePath = path.join(componentDir, `${componentName}.${fileExtension}`);
+    fs.writeFileSync(componentFilePath, componentContent);
+    
+    console.log(chalk.green(`✅ Component created: ${componentFilePath}`));
+    
+    // Generate CSS file if requested
+    if (options.css) {
+      const cssContent = scssTemplate(componentName, !!options.layout);
+      const cssFilePath = path.join(componentDir, `${componentName}.scss`);
+      fs.writeFileSync(cssFilePath, cssContent);
+      console.log(chalk.green(`✅ CSS file created: ${cssFilePath}`));
     }
     
-    // Write files
-    const componentFile = path.join(componentDir, `${componentName}.tsx`);
-    const cssFile = path.join(componentDir, `${componentName}.module.css`);
-    
-    await fs.writeFile(componentFile, componentContent);
-    await fs.writeFile(cssFile, cssContent);
-    
-    // Success messages
-    console.log(chalk.green(`✅ ${framework.toUpperCase()} component created successfully!`));
-    console.log(chalk.blue(`📁 Location: ${path.relative(process.cwd(), componentDir)}`));
-    console.log(chalk.blue(`📄 Files:`));
-    console.log(chalk.blue(`   - ${componentName}.tsx`));
-    console.log(chalk.blue(`   - ${componentName}.module.css`));
-    
-    // Component type info
-    if (isLayout) {
-      console.log(chalk.magenta(`🏗️  Layout component with header, main, and footer`));
+    // Generate test file if requested
+    if (options.test) {
+      const testContent = testTemplate(componentName, isTypeScript, !!options.css);
+      const testExtension = isTypeScript ? 'test.tsx' : 'test.jsx';
+      const testFilePath = path.join(componentDir, `${componentName}.${testExtension}`);
+      fs.writeFileSync(testFilePath, testContent);
+      console.log(chalk.green(`✅ Test file created: ${testFilePath}`));
     }
     
-    if (isServer && framework === 'next') {
-      console.log(chalk.cyan(`🖥️  Server-side component (SSR)`));
-    } else if (isClient || (!isServer && framework === 'next')) {
-      console.log(chalk.yellow(`🌐 Client-side component (CSR)`));
+    // Generate story file if requested
+    if (options.story) {
+      const storyContent = storyTemplate(componentName, isTypeScript);
+      const storyExtension = isTypeScript ? 'stories.tsx' : 'stories.jsx';
+      const storyFilePath = path.join(componentDir, `${componentName}.${storyExtension}`);
+      fs.writeFileSync(storyFilePath, storyContent);
+      console.log(chalk.green(`✅ Story file created: ${storyFilePath}`));
     }
     
-    if (props.length > 0) {
-      console.log(chalk.green(`🔧 Props: ${props.map(p => `${p.name}: ${p.type}`).join(', ')}`));
-    }
+    // Generate index file for easier importing
+    const indexContent = `export { default } from './${componentName}';`;
+    const indexExtension = isTypeScript ? 'ts' : 'js';
+    const indexFilePath = path.join(componentDir, `index.${indexExtension}`);
+    fs.writeFileSync(indexFilePath, indexContent);
+    console.log(chalk.green(`✅ Index file created: ${indexFilePath}`));
     
-    // Usage examples
-    console.log(chalk.gray('\n📋 Usage examples:'));
-    if (isLayout) {
-      console.log(chalk.gray(`   <${componentName}>`));
-      console.log(chalk.gray(`     <YourPageContent />`));
-      console.log(chalk.gray(`   </${componentName}>`));
-    } else {
-      const exampleProps = props.length > 0 
-        ? ` ${props.map(p => `${p.name}="${p.type === 'string' ? 'value' : p.type === 'boolean' ? 'true' : '{}'}"`).join(' ')}`
-        : '';
-      console.log(chalk.gray(`   <${componentName}${exampleProps} />`));
-    }
+    // Success message
+    console.log(chalk.cyan.bold(`\n🎉 ${componentName} component generated successfully!`));
+    console.log(chalk.yellow(`📁 Location: ${componentDir}`));
+    
+    // Show import example
+    const relativePath = path.relative(process.cwd(), componentDir);
+    console.log(chalk.gray(`\n💡 Import with: import ${componentName} from './${relativePath}';`));
     
   } catch (error) {
-    console.error(chalk.red('❌ Component generation failed'));
-    if (error instanceof Error) {
-      console.error(chalk.red(error.message));
-    }
+    console.error(chalk.red('❌ Error generating component:'), error);
     process.exit(1);
   }
-};
+}
