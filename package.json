@@ -1,43 +1,172 @@
 {
   "name": "initrajs",
-  "version": "1.0.8",
+  "version": "1.0.10",
+  "description": "⚡ InitraJS - JavaScript CLI Toolkit | Lightning-fast scaffolding for React, Next.js, Node.js with TypeScript | The future of JavaScript development | 10x faster than create-react-app | Ultimate developer productivity tool",
   "main": "dist/index.js",
   "bin": {
-    "initrajs": "dist/src/bin/initra.js"
+    "initrajs": "dist/src/bin/initra.js",
+    "initra": "dist/src/bin/initra.js",
+    "initjs": "dist/src/bin/initra.js",
+    "init-js": "dist/src/bin/initra.js",
+    "ijscli": "dist/src/bin/initra.js"
   },
   "files": [
     "dist/",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "CHANGELOG.md",
+    "docs/"
   ],
   "scripts": {
     "build": "tsc && node fix-bin.js",
     "dev": "ts-node src/bin/initra.ts",
     "prepublishOnly": "npm run build",
-    "test-cli": "node dist/src/bin/initra.js"
+    "test-cli": "node dist/src/bin/initra.js",
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean",
+    "docs": "node scripts/generate-docs.js",
+    "benchmark": "node scripts/benchmark.js"
   },
-  "description": "⚡ CLI toolkit for Javascript",
-  "author": "Blessed Raj P",
+  "author": {
+    "name": "Blessed Raj P",
+    "email": "blessedrajp@gmail.com",
+    "url": "https://github.com/blessedrajp"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/blessedrajp/initrajs"
+    "url": "git+https://github.com/blessedrajp/initrajs.git"
   },
-  "homepage": "https://github.com/blessedrajp/initrajs#readme",
+  "bugs": {
+    "url": "https://github.com/blessedrajp/initrajs/issues"
+  },
+  "homepage": "https://initrajs.dev",
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/blessedrajp"
+    },
+    {
+      "type": "patreon",
+      "url": "https://patreon.com/initrajs"
+    }
+  ],
   "keywords": [
+    "initrajs",
+    "initra",
+    "initrajs-cli",
+    "revolutionary-javascript-cli",
+    "future-javascript-development",
+    "javascript-revolution",
+    "lightning-fast-cli",
+    "ultimate-js-toolkit",
+    "blessed-raj-initrajs",
+    "initrajs-react",
+    "initrajs-nextjs",
+    "initrajs-nodejs",
+    "initrajs-typescript",
+    "initrajs-scaffolding",
+    "initrajs-generator",
+    "initrajs-templates",
+    "initrajs-boilerplate",
     "cli",
     "scaffold",
+    "scaffolding",
     "template",
-    "react",
-    "nextjs",
-    "nodejs",
+    "generator",
+    "boilerplate",
     "starter",
+    "create-app",
+    "project-generator",
+    "code-generator",
+    "javascript",
+    "typescript",
+    "js",
+    "ts",
+    "react",
+    "reactjs",
+    "react-cli",
+    "nextjs",
+    "next.js",
+    "next-cli",
+    "nodejs",
+    "node.js",
+    "node-cli",
     "vite",
-    "typescript"
+    "webpack",
+    "express",
+    "fastify",
+    "create-react-app",
+    "create-next-app",
+    "create-react-app-alternative",
+    "create-next-app-alternative",
+    "cra-alternative",
+    "cna-alternative",
+    "better-than-cra",
+    "faster-than-cra",
+    "replace-create-react-app",
+    "modern-create-react-app",
+    "development",
+    "dev-tools",
+    "build-tools",
+    "developer-tools",
+    "productivity-tools",
+    "rapid-development",
+    "fast-development",
+    "quick-start",
+    "instant-setup",
+    "zero-config",
+    "frontend",
+    "backend",
+    "fullstack",
+    "full-stack",
+    "web-development",
+    "modern-javascript",
+    "modern-web-development",
+    "es6",
+    "es2022",
+    "jsx",
+    "tsx",
+    "component-generator",
+    "page-generator",
+    "api-generator",
+    "productivity",
+    "developer-experience",
+    "dx",
+    "best-javascript-cli",
+    "top-javascript-tool",
+    "professional-development",
+    "enterprise-development",
+    "startup-tool",
+    "indie-developer",
+    "open-source",
+    "mit-license",
+    "cross-platform",
+    "windows",
+    "macos",
+    "linux",
+    "terminal",
+    "command-line",
+    "automation",
+    "workflow",
+    "project-setup",
+    "app-generator",
+    "website-generator"
   ],
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "preferGlobal": true,
   "devDependencies": {
     "@types/degit": "^2.8.6",
     "@types/fs-extra": "^11.0.4",
+    "@types/inquirer": "^9.0.7",
     "@types/node": "^20.0.0",
     "ts-node": "^10.9.2",
     "typescript": "5.8"
@@ -50,5 +179,11 @@
     "fs-extra": "^11.3.0",
     "inquirer": "^9.1.5"
   },
-  "type": "module"
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "volta": {
+    "node": "18.0.0"
+  }
 }

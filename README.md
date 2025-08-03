@@ -63,19 +63,14 @@
 
 ## 📦 Installation & Quick Start
 
-### ⚡ Run instantly with NPX (Recommended)
-```bash
-npx initrajs init
-```
-
-### 🌍 Global Installation
+### 🌍 Global Installation (Recommended)
 ```bash 
 npm install -g initrajs
-initrajs init
 ```
 
 ### 🚀 Quick Project Setup
 ```bash
+
 # Initialize a new project
 npx initrajs init
 
@@ -95,7 +90,14 @@ initrajs api User --ts
 
 ### 🧩 **Component Generation**
 
+
+
+
+
 ```bash
+#installation
+npm install -g initrajs
+
 # Basic component (defaults to TypeScript)
 initrajs c Header
 
