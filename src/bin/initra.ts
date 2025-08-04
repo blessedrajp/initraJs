@@ -57,14 +57,15 @@ program
   });
 
 // Generate API (all backend files including routes)
+// Generate API (all backend files including routes)
 program
   .command('api <name>')
   .description('Generate API with controller, service, model, DTO, and routes')
   .option('-a, --all', 'Generate all files (default)', true)
-  .option('-t, --typescript', 'Generate TypeScript files')
-  .option('-j, --javascript', 'Generate JavaScript files (default)')
+  .option('--ts', 'Generate TypeScript files (default)')
+  .option('--js', 'Generate JavaScript files')
   .action((name, options) => {
-    const fileType: FileType = options.typescript ? 'ts' : 'js';
+    const fileType: FileType = options.js ? 'js' : 'ts';  // Changed: default to 'ts'
     generateBackendFile('api', name, fileType, options);
   });
 
@@ -73,10 +74,10 @@ program
   .command('route <name>')
   .alias('r')
   .description('Generate a route file')
-  .option('-t, --typescript', 'Generate TypeScript file')
-  .option('-j, --javascript', 'Generate JavaScript file (default)')
+  .option('--ts', 'Generate TypeScript file (default)')
+  .option('--js', 'Generate JavaScript file')
   .action((name, options) => {
-    const fileType: FileType = options.typescript ? 'ts' : 'js';
+    const fileType: FileType = options.js ? 'js' : 'ts';  // Changed: default to 'ts'
     generateBackendFile('route', name, fileType, options);
   });
 
@@ -85,10 +86,10 @@ program
   .command('model <name>')
   .alias('m')
   .description('Generate a model file')
-  .option('-t, --typescript', 'Generate TypeScript file')
-  .option('-j, --javascript', 'Generate JavaScript file (default)')
+  .option('--ts', 'Generate TypeScript file (default)')
+  .option('--js', 'Generate JavaScript file')
   .action((name, options) => {
-    const fileType: FileType = options.typescript ? 'ts' : 'js';
+    const fileType: FileType = options.js ? 'js' : 'ts';  // Changed: default to 'ts'
     generateBackendFile('model', name, fileType, options);
   });
 
@@ -97,10 +98,10 @@ program
   .command('controller <name>')
   .alias('ctrl')
   .description('Generate a controller file')
-  .option('-t, --typescript', 'Generate TypeScript file')
-  .option('-j, --javascript', 'Generate JavaScript file (default)')
+  .option('--ts', 'Generate TypeScript file (default)')
+  .option('--js', 'Generate JavaScript file')
   .action((name, options) => {
-    const fileType: FileType = options.typescript ? 'ts' : 'js';
+    const fileType: FileType = options.js ? 'js' : 'ts';  // Changed: default to 'ts'
     generateBackendFile('controller', name, fileType, options);
   });
 
@@ -109,11 +110,22 @@ program
   .command('service <name>')
   .alias('svc')
   .description('Generate a service file')
-  .option('-t, --typescript', 'Generate TypeScript file')
-  .option('-j, --javascript', 'Generate JavaScript file (default)')
+  .option('--ts', 'Generate TypeScript file (default)')
+  .option('--js', 'Generate JavaScript file')
   .action((name, options) => {
-    const fileType: FileType = options.typescript ? 'ts' : 'js';
+    const fileType: FileType = options.js ? 'js' : 'ts';  // Changed: default to 'ts'
     generateBackendFile('service', name, fileType, options);
+  });
+
+// Generate DTO
+program
+  .command('dto <name>')
+  .description('Generate a DTO (Data Transfer Object) file')
+  .option('--ts', 'Generate TypeScript file (default)')
+  .option('--js', 'Generate JavaScript file')
+  .action((name, options) => {
+    const fileType: FileType = options.js ? 'js' : 'ts';  // Changed: default to 'ts'
+    generateBackendFile('dto', name, fileType, options);
   });
 
 // Generate Middleware
@@ -121,11 +133,11 @@ program
   .command('middleware <name>')
   .alias('mw')
   .description('Generate a middleware file')
-  .option('-t, --typescript', 'Generate TypeScript file')
-  .option('-j, --javascript', 'Generate JavaScript file (default)')
+  .option('--ts', 'Generate TypeScript file (default)')
+  .option('--js', 'Generate JavaScript file')
   .option('--jwt', 'Generate JWT authentication middleware')
   .action((name, options) => {
-    const fileType: FileType = options.typescript ? 'ts' : 'js';
+    const fileType: FileType = options.js ? 'js' : 'ts';  // Changed: default to 'ts'
     // Pass the middleware type in options
     const backendOptions = {
       ...options,
