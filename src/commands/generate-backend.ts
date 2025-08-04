@@ -33,7 +33,7 @@ import {
   jwtMiddlewareTemplateTS,
   routeTemplateJS,
   routeTemplateTS
-} from '../templates/backend/index.js';
+} from '../templates/backend/simple-index.js';
 
 // Template mapping
 const templates = {

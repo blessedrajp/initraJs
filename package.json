@@ -22,8 +22,6 @@
     "dev": "ts-node src/bin/initra.ts",
     "prepublishOnly": "npm run build",
     "test-cli": "node dist/src/bin/initra.js",
-    "clean": "rm -rf dist",
-    "prebuild": "npm run clean",
     "docs": "node scripts/generate-docs.js",
     "benchmark": "node scripts/benchmark.js"
   },
