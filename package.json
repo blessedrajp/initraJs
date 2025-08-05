@@ -38,17 +38,7 @@
   "bugs": {
     "url": "https://github.com/blessedrajp/initrajs/issues"
   },
-  "homepage": "https://initrajs.dev",
-  "funding": [
-    {
-      "type": "github",
-      "url": "https://github.com/sponsors/blessedrajp"
-    },
-    {
-      "type": "patreon",
-      "url": "https://patreon.com/initrajs"
-    }
-  ],
+  "homepage": "https://initrajs.vercel.app/",
   "keywords": [
     "initrajs",
     "initra",
