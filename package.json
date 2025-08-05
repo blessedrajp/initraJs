@@ -1,6 +1,6 @@
 {
   "name": "initrajs",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "description": "⚡ InitraJS - JavaScript CLI Toolkit | Lightning-fast scaffolding for React, Next.js, Node.js with TypeScript | The future of JavaScript development | 10x faster than create-react-app | Ultimate developer productivity tool",
   "main": "dist/index.js",
   "bin": {
@@ -38,17 +38,7 @@
   "bugs": {
     "url": "https://github.com/blessedrajp/initrajs/issues"
   },
-  "homepage": "https://initrajs.dev",
-  "funding": [
-    {
-      "type": "github",
-      "url": "https://github.com/sponsors/blessedrajp"
-    },
-    {
-      "type": "patreon",
-      "url": "https://patreon.com/initrajs"
-    }
-  ],
+  "homepage": "https://initrajs.vercel.app/",
   "keywords": [
     "initrajs",
     "initra",
