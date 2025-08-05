@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Made by Blessed Raj P](https://img.shields.io/badge/made%20by-blessedrajp-blueviolet)](https://github.com/blessedrajp)
 
-**🌐 [Try it Live](https://initrajs.vercel.app) | 📖 [Documentation](https://initrajs.vercel.app/docs) | 🚀 [Get Started Now](#-installation--quick-start)**
+**🌐 [Try it Live](https://initrajs.vercel.app) | 📖 [Documentation](https://initrajs.vercel.app) | 🚀 [Get Started Now](#-installation--quick-start)**
 
 ---
 
